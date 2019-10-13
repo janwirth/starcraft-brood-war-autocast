@@ -17,9 +17,12 @@ def on_press(key):
             keyboard.release('a')
             time.sleep(0.15)
             mouse.press(Button.left)
+            time.sleep(0.05)
             mouse.release(Button.left)
         if key.char == MOVE_HOTKEY:
+            time.sleep(0.15)
             mouse.press(Button.right)
+            time.sleep(0.05)
             mouse.release(Button.right)
     except AttributeError:
         return True
