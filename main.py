@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from pynput.mouse import Button
 from pynput.keyboard import Key, Listener
 import pynput.mouse

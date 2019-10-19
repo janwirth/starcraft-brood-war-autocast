@@ -5,7 +5,7 @@ Perform mouseclicks and arbitrary commands using the keyboard.
 ## Usage
 ```sh
 pip install -r requirements.txt
-python3 main.py
+./main.py
 ```
 Hotkeys are configured in `main.py`.
 Default is 'q' for attack and 'w' for move.
