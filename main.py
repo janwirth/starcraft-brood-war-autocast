@@ -16,7 +16,12 @@ keyboard = pynput.keyboard.Controller()
 
 pressed: Dict[str, bool] = {}
 
-def on_press(key: KeyCode):
+def on_press(key: KeyCode | Key | None) -> None:
+    if key is None:
+        return None
+    if not isinstance(key, KeyCode):
+        print("NOT KEYCODE", key)
+        return None
 
     try:
         if (not (key.char)):
@@ -27,6 +32,7 @@ def on_press(key: KeyCode):
         pressed[key.char] = True
         print("PRESS", key )
         if key.char == ATTACK_HOTKEY:
+            print("ATTACK")
             keyboard.press('a')
             keyboard.release('a')
             time.sleep(0.15)
@@ -34,26 +40,36 @@ def on_press(key: KeyCode):
             time.sleep(0.05)
             mouse.release(Button.left)
         if key.char == LMB_HOTKEY:
+            print("LMB")
             mouse.press(Button.left)
         if key.char == RMB_HOTKEY:
+            print("RMB")
             mouse.press(Button.right)
     except AttributeError:
-        return True
+        return None
 
-def on_release(key: KeyCode):
+def on_release(key: KeyCode | Key | None) -> None:
+    if key is None:
+        return None
+    if not isinstance(key, KeyCode):
+        print("NOT KEYCODE", key)
+        return None
+
     try:
-        print("RELEAESE", key )
+        print("RELEASE", key )
         if not key.char:
             return
         time.sleep(0.15)
         pressed[key.char] = False
         if key.char == LMB_HOTKEY:
+            print("RELEASE LEFT")
             mouse.release(Button.left)
         if key.char == RMB_HOTKEY:
+            print("RELEASE RIGHT")
             mouse.release(Button.right)
     except:
         pass
-    return True
+    return None
 #    try:
 #        if key.char == ATTACK_HOTKEY:
 #            mouse.release(Button.left)
