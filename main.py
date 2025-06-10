@@ -39,7 +39,7 @@ def on_press(key: KeyCode | Key | None) -> None:
             mouse.press(Button.left)
             time.sleep(0.05)
             mouse.release(Button.left)
-        if key.char == LMB_HOTKEY:
+        if key.char.lower() == LMB_HOTKEY:
             print("LMB")
             mouse.press(Button.left)
         if key.char == RMB_HOTKEY:
@@ -59,9 +59,9 @@ def on_release(key: KeyCode | Key | None) -> None:
         print("RELEASE", key )
         if not key.char:
             return
-        time.sleep(0.15)
+        time.sleep(0.01)
         pressed[key.char] = False
-        if key.char == LMB_HOTKEY:
+        if key.char.lower() == LMB_HOTKEY:
             print("RELEASE LEFT")
             mouse.release(Button.left)
         if key.char == RMB_HOTKEY:
