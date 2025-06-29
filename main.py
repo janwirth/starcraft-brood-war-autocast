@@ -6,6 +6,7 @@ from pynput.keyboard import Key, Listener, KeyCode
 import pynput.mouse
 import pynput.keyboard
 import time
+from AppKit import NSWorkspace
 
 ATTACK_HOTKEY = 'f'
 RMB_HOTKEY = 'w'
@@ -17,6 +18,12 @@ keyboard = pynput.keyboard.Controller()
 pressed: Dict[str, bool] = {}
 
 def on_press(key: KeyCode | Key | None) -> None:
+    active_app = NSWorkspace.sharedWorkspace().activeApplication()
+    app_name = active_app['NSApplicationName']
+    if app_name != "StarCraft":
+        return
+
+    print(app_name)
     if key is None:
         return None
     if not isinstance(key, KeyCode):
@@ -49,6 +56,10 @@ def on_press(key: KeyCode | Key | None) -> None:
         return None
 
 def on_release(key: KeyCode | Key | None) -> None:
+    active_app = NSWorkspace.sharedWorkspace().activeApplication()
+    app_name = active_app['NSApplicationName']
+    if app_name != "StarCraft":
+        return
     if key is None:
         return None
     if not isinstance(key, KeyCode):
